@@ -1,0 +1,1550 @@
+/* ==========================================================================
+   RITMO RUN CLUB — HERO SECTION PREMIUM (ESTÉTICA 4K & PARALLAX PROFUNDO)
+   Direção de Arte: Esportivo Cinético · Luz Matinal · Profundidade Monumental
+   Paleta: Preto Floresta (#070c09) · Branco Puro (#f5f7f2) · Laranja Cinético (#ff5518)
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* Paleta Oficial */
+  --bg: #070c09;
+  --bg-surface: #0e1611;
+  --bg-elevated: #15221a;
+  
+  --ink: #f5f7f2;
+  --ink-bright: #ffffff;
+  --muted: rgba(245, 247, 242, 0.72);
+  --subtle: rgba(245, 247, 242, 0.45);
+  
+  --accent: #ff5518;
+  --accent-light: #ff7540;
+  --accent-dark: #e03e00;
+  --accent-glow: rgba(255, 85, 24, 0.4);
+  --accent-gradient: linear-gradient(135deg, #ff6b35 0%, #ff5518 55%, #e03e00 100%);
+  
+  --gold-sun: rgba(255, 185, 110, 0.35);
+  --glass-bg: rgba(7, 12, 9, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-hover: rgba(255, 255, 255, 0.28);
+  
+  /* Dimensões e Espaçamentos */
+  --bar-h: clamp(100px, 13vh, 150px);
+  --max-width: 1560px;
+  
+  /* Tipografia */
+  --font-display: "Anton", -apple-system, BlinkMacSystemFont, "Segoe UI", Impact, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Curvas de Movimento */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-cubic: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+img, picture {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   1. NAVEGAÇÃO PRINCIPAL (GLASSMORPHISM FROSTED & SCROLL ADAPTIVE)
+   ========================================================================== */
+
+.nav {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  width: calc(100% - 2.5rem);
+  max-width: 860px;
+  z-index: 90;
+  padding: 0.65rem 1.35rem;
+  background: rgba(10, 16, 12, 0.8);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-luxury), transform 0.5s var(--ease-luxury), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav.scrolled {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.nav__inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Logotipo */
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  font-weight: 400;
+  color: var(--ink-bright);
+  transition: transform 0.2s ease;
+}
+
+.nav__logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-symbol {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 2px 8px var(--accent-glow));
+}
+
+.logo-symbol svg {
+  width: 100%;
+  height: 100%;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2vw, 2.2rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.logo-dot {
+  color: var(--accent);
+}
+
+/* Links Desktop */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.8vw, 42px);
+}
+
+.nav__link {
+  color: var(--ink);
+  font-size: clamp(0.88rem, 0.95vw, 1.02rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.82;
+  position: relative;
+  padding-block: 0.35rem;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.25s var(--ease-out-cubic);
+}
+
+.nav__link:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+.nav__link:hover::after {
+  width: 100%;
+}
+
+/* Ações do Topo */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Menu Mobile Toggle */
+.nav__toggle {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.nav__toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--glass-border-hover);
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 1.15rem;
+  height: 1.5px;
+  background-color: #fff;
+  transition: transform 0.3s var(--ease-luxury), opacity 0.2s ease;
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:first-child {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:last-child {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+/* Drawer Mobile */
+.nav__drawer {
+  position: absolute;
+  top: 100%;
+  left: clamp(20px, 4vw, 64px);
+  right: clamp(20px, 4vw, 64px);
+  margin-top: 0.75rem;
+  padding: 1.75rem;
+  background: rgba(8, 14, 10, 0.96);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: drawerOpen 0.35s var(--ease-luxury) forwards;
+}
+
+.nav__drawer[hidden] {
+  display: none;
+}
+
+@keyframes drawerOpen {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav__drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.nav__drawer-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.nav__drawer-link:hover {
+  color: #fff;
+  padding-left: 0.5rem;
+}
+
+.nav__drawer-footer {
+  padding-top: 0.5rem;
+}
+
+/* ==========================================================================
+   2. BOTÕES TÁTEIS E REFINADOS (QUIET LUXURY & ALTA ENERGIA ESPORTIVA)
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: clamp(12px, 1.4vh, 16px) clamp(22px, 2vw, 32px);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 1vw, 1.05rem);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease-luxury), box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.btn__arrow {
+  width: 0.95rem;
+  height: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+.btn__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover .btn__icon {
+  transform: translateX(4px);
+}
+
+/* Botão Primário Laranja Cinético */
+.btn--primary {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px -6px rgba(255, 85, 24, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 40px -6px rgba(255, 85, 24, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Botão Ghost Translúcido */
+.btn--ghost {
+  color: var(--ink-bright);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.48);
+  transform: translateY(-1px);
+}
+
+/* Botão Link com Underline */
+.btn--link {
+  color: var(--ink);
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  font-size: clamp(0.92rem, 1vw, 1.05rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.link-arrow {
+  transition: transform 0.2s ease;
+}
+
+.btn--link:hover {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.btn--link:hover .link-arrow {
+  transform: translateX(4px);
+}
+
+.btn--full {
+  width: 100%;
+}
+
+/* ==========================================================================
+   3. HERO SECTION & SISTEMA PARALLAX MULTICAMADA 4K (COM EFEITO CORTINA)
+   ========================================================================== */
+
+/* Fundo da Hero: Estrada 4K, Sol, Névoa e Pelotão Intermediário (Atrás da cortina branca, z-index: 1) */
+.hero-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  background: #08110a;
+  transition: opacity 0.4s ease;
+}
+
+/* Palco da Hero: Ações, Corredores Frontais e Névoa Atmosférica */
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 640px;
+  width: 100%;
+  overflow: visible;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Névoa e Haze Atmosférico Matinal passando sobre o título na Hero (Mix-blend Screen, z-index: 25) */
+.hero__atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at 50% 32%,
+      rgba(255, 195, 125, 0.28) 0%,
+      rgba(255, 130, 50, 0.13) 38%,
+      rgba(255, 85, 24, 0.04) 58%,
+      transparent 76%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(5, 10, 7, 0.38) 0%,
+      transparent 38%,
+      rgba(7, 12, 9, 0.22) 80%,
+      transparent 100%
+    );
+  mix-blend-mode: screen;
+  will-change: transform, clip-path;
+}
+
+/* Base de todas as camadas */
+.layer {
+  position: absolute;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Camada 1: Fundo Fotográfico 4K (Estrada e Floresta) - em .hero-backdrop
+   -------------------------------------------------------------------------- */
+.layer--bg {
+  inset: -6vh -5vw;
+  z-index: 1;
+  transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0);
+}
+
+.layer--bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  filter: saturate(1.12) brightness(0.9) contrast(1.05);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Iluminação Atmosférica Volumétrica (Sunburst central e névoa da manhã) */
+.hero__sunburst {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(255, 185, 110, 0.32) 0%,
+    rgba(255, 135, 55, 0.16) 35%,
+    rgba(255, 85, 24, 0.05) 60%,
+    transparent 75%
+  );
+  mix-blend-mode: screen;
+}
+
+.hero__fog {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(5, 10, 7, 0.68) 0%, transparent 40%),
+    linear-gradient(to top, rgba(7, 12, 9, 0.75) 0%, transparent 45%);
+}
+
+/* --------------------------------------------------------------------------
+   Camada 2: Pelotão Intermediário (4 Corredores) com Sombra no Asfalto - em .hero-backdrop
+   -------------------------------------------------------------------------- */
+.layer--mid {
+  bottom: clamp(14px, 2.5vh, 36px);
+  left: 50%;
+  transform: translate3d(calc(-50% + var(--tx, 0px)), var(--ty, 0px), 0);
+  height: clamp(390px, 58vh, 1050px);
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.mid-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform: translateX(-4%);
+}
+
+.mid-runners {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  filter: brightness(0.86) contrast(1.04) saturate(0.92) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
+}
+
+.mid-shadow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.88;
+  transform: translateY(3%) scaleY(0.7);
+  transform-origin: center bottom;
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Camada 3: Título Monumental na Hero (Versão Branca, z-index: 10)
+   Fica cravado a z-index 10: ATRÁS dos 3 atletas líderes (z-index 20)
+   -------------------------------------------------------------------------- */
+.layer--title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+#title-white {
+  position: relative;
+  will-change: transform, clip-path;
+  transform: translate3d(0, clamp(60px, 11vh, 120px), 0);
+}
+
+/* Container do Título Laranja dentro de #treinos (z-index: 42 sobre fundo branco) */
+.hero__title-box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  will-change: transform;
+  z-index: 42;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.hero__title {
+  margin: 0;
+  padding: 0.12em 0;
+  display: flex;
+  gap: 0.28em;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(5.5rem, 13vw, 16.5rem);
+  line-height: 1.18;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  user-select: none;
+  overflow: visible;
+}
+
+/* Versão Branca na Hero */
+.title--white .title-word--solid {
+  color: #ffffff;
+  background: none;
+  -webkit-text-fill-color: #ffffff;
+  filter: none;
+  text-shadow: none;
+}
+
+.title--white .title-word--outline {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: clamp(2px, 0.18vw, 3.8px) #ffffff;
+  text-shadow: none;
+}
+
+/* Versão Laranja em #treinos */
+.title--orange .title-word--solid {
+  color: var(--accent);
+  background: none;
+  -webkit-text-fill-color: var(--accent);
+  filter: none;
+  text-shadow: none;
+}
+
+.title--orange .title-word--outline {
+  color: transparent;
+  background: none;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: clamp(2px, 0.18vw, 3.8px) var(--accent);
+  text-shadow: none;
+}
+
+/* Elemento Oculto para Acessibilidade e Leitores de Tela */
+.hero__title-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Camada 4: Pelotão da Frente (3 Atletas Líderes) - em .hero
+   Fica NA FRENTE do título branco na Hero (z-index: 20)
+   -------------------------------------------------------------------------- */
+.layer--front {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate3d(calc(-50% + var(--tx, 0px)), var(--ty, 0px), 0);
+  height: clamp(470px, 70vh, 1300px);
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+  will-change: transform, clip-path;
+}
+
+.front-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform: translateX(-1.6%);
+}
+
+/* Sombra de Contato com o Asfalto */
+.front-contact-shadow {
+  position: absolute;
+  bottom: 2%;
+  left: 15%;
+  right: 15%;
+  height: 80px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 50%, transparent 80%);
+  filter: blur(14px);
+  pointer-events: none;
+  transform: scaleY(0.45);
+}
+
+.front-runners {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 38px rgba(0, 0, 0, 0.72));
+}
+
+/* --------------------------------------------------------------------------
+   Sombra Inferior & Barra Informativa (Hero Stage)
+   -------------------------------------------------------------------------- */
+.hero__shade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: clamp(160px, 28vh, 320px);
+  z-index: 5; /* Fica ATRÁS do título branco (z-index: 10) e escurece apenas a estrada/árvores */
+  background: linear-gradient(
+    to top,
+    var(--bg) 14%,
+    rgba(7, 12, 9, 0.92) 42%,
+    rgba(7, 12, 9, 0.5) 72%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.hero__bar {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 30;
+  min-height: var(--bar-h);
+  padding: 0 clamp(20px, 4vw, 64px) clamp(20px, 3.2vh, 36px);
+  pointer-events: auto;
+}
+
+.hero__bar-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: clamp(24px, 4vw, 60px);
+  width: 100%;
+}
+
+/* Canto Inferior Esquerdo */
+.hero__content {
+  flex: 1;
+  max-width: 480px;
+  text-align: left;
+}
+
+.hero__lead {
+  margin: 0;
+  max-width: 480px;
+  color: var(--muted);
+  font-size: clamp(0.92rem, 1.05vw, 1.12rem);
+  line-height: 1.55;
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Canto Inferior Direito: CTAs agrupados */
+.hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* Animação Inicial de Entrada dos Elementos */
+.hero__title,
+.mid-wrapper,
+.front-wrapper,
+.hero__bar {
+  animation: entranceFade 1s var(--ease-luxury) both;
+}
+
+.hero__title   { animation-delay: 0.1s; }
+.mid-wrapper   { animation-delay: 0.22s; }
+.front-wrapper { animation-delay: 0.35s; }
+.hero__bar     { animation-delay: 0.48s; }
+
+@keyframes entranceFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   4. SEÇÃO DE CONTINUIDADE (TREINOS & METODOLOGIA ATHLETIC LUXURY)
+   ========================================================================== */
+
+.next {
+  position: relative;
+  z-index: 40;
+  /* Padding-top generoso para acomodar o docking e respiro editorial */
+  padding: clamp(140px, 18vh, 220px) clamp(20px, 4vw, 64px) clamp(90px, 14vh, 160px);
+  background: radial-gradient(circle at 50% 0%, #ffffff 0%, #fafbf7 55%, #f4f6f1 100%);
+  color: #08110a;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* Full Blur: Cobre todo o conteúdo de #treinos e fica por cima do título durante a descida */
+.next__full-blur {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 45; /* Cobre todo o conteúdo de #treinos e fica por cima do título durante a descida */
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  opacity: 1;
+  will-change: opacity;
+  transition: opacity 0.35s ease-out;
+}
+
+.next__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Sincronia Editorial do Título em Laranja Total (Slot Receptor) */
+.next__editorial-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2.75rem;
+  width: 100%;
+}
+
+/* Preparação para o Scroll-Driven Blur Reveal */
+.editorial-prefix,
+.editorial-suffix,
+.next__lead-desc {
+  will-change: filter, opacity, transform;
+  transition: filter 0.15s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out;
+}
+
+.editorial-prefix,
+.editorial-suffix {
+  display: block;
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 1.85vw, 1.7rem);
+  font-weight: 500;
+  color: #3b463e;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.editorial-prefix {
+  margin-bottom: 0.85rem;
+}
+
+.editorial-suffix {
+  margin-top: 0.85rem;
+}
+
+/* Slot Receptor onde o 'CORRA ALÉM' da Hero pousa com exatidão */
+.editorial-title-slot {
+  min-height: clamp(5.5rem, 13vw, 16.5rem);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.next__lead-desc {
+  color: #4c5c50;
+  line-height: 1.8;
+  font-size: clamp(1.08rem, 1.25vw, 1.28rem);
+  max-width: 60ch;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Seletor Interativo de Objetivos (Tabs com Pílulas) */
+.next__filter-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 0 auto 4rem;
+  padding: 0.35rem;
+  background: rgba(12, 24, 15, 0.04);
+  border: 1px solid rgba(12, 24, 15, 0.07);
+  border-radius: 999px;
+  max-width: fit-content;
+}
+
+.filter-tab {
+  border: none;
+  background: transparent;
+  color: #4b5a4f;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.6rem 1.35rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-luxury);
+}
+
+.filter-tab:hover {
+  color: #08110a;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.filter-tab.is-active {
+  background: #08110a;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Bento Grid Atlético de Luxo (On Running / Tracksmith / Nike Lab Style) */
+.next__bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(24px, 2.5vw, 36px);
+  margin-bottom: 4.5rem;
+}
+
+@media (min-width: 992px) {
+  .next__bento-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .bento-card--large {
+    grid-column: span 8;
+  }
+  .bento-card--medium {
+    grid-column: span 4;
+  }
+  .bento-card--half-left {
+    grid-column: span 6;
+  }
+  .bento-card--half-right {
+    grid-column: span 6;
+  }
+}
+
+.bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(2rem, 3vw, 2.85rem);
+  background: #ffffff;
+  border: 1px solid rgba(12, 24, 15, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.015), 0 16px 36px -4px rgba(12, 24, 15, 0.04), 0 32px 64px -12px rgba(12, 24, 15, 0.05);
+  transition: transform 0.35s var(--ease-luxury), border-color 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease;
+  overflow: hidden;
+}
+
+.bento-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(255, 85, 24, 0.3) 100%);
+  opacity: 0;
+  transform: scaleX(0.2);
+  transform-origin: left;
+  transition: opacity 0.35s ease, transform 0.35s var(--ease-luxury);
+}
+
+.bento-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 85, 24, 0.35);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02), 0 20px 48px -8px rgba(255, 85, 24, 0.12), 0 40px 80px -12px rgba(12, 24, 15, 0.08);
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.bento-card.is-dimmed {
+  opacity: 0.32;
+  transform: scale(0.985);
+}
+
+.bento-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.35rem;
+}
+
+.bento-card__meta-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #839387;
+}
+
+.bento-card__tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(255, 85, 24, 0.07);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 85, 24, 0.2);
+}
+
+.bento-card h3 {
+  font-size: clamp(1.35rem, 1.55vw, 1.7rem);
+  font-weight: 700;
+  color: #08110a;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin-bottom: 0.85rem;
+}
+
+.bento-card p {
+  font-size: 0.98rem;
+  line-height: 1.68;
+  color: #4f5f53;
+  margin-bottom: 1.75rem !important;
+}
+
+/* Telemetria Cardíaca Esportiva (Card 1) */
+.telemetry-box {
+  background: #f7faf5;
+  border: 1px solid rgba(12, 24, 15, 0.07);
+  border-radius: 20px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.telemetry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.15rem;
+}
+
+.telemetry-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5d6d60;
+}
+
+.telemetry-badge {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0c6e39;
+  background: #e3f5eb;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(12, 110, 57, 0.15);
+}
+
+.zone-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.zone-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+  color: #3b4b3e;
+}
+
+.zone-color {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.45rem;
+}
+
+.zone-z1 { background: #61b390; }
+.zone-z2 { background: var(--accent); }
+.zone-z3 { background: #e07a1f; }
+.zone-z4 { background: #d93829; }
+.zone-z5 { background: #9b1d20; }
+.zone-highlight { color: var(--accent); }
+.zone-pct { font-weight: 700; }
+
+.zone-track {
+  height: 6px;
+  background: rgba(12, 24, 15, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.zone-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.zone-fill--z1 { background: #61b390; }
+.zone-fill--z2 { background: linear-gradient(90deg, #ff5518 0%, #ff7844 100%); }
+.zone-fill--z3 { background: #e07a1f; }
+.zone-fill--z4 { background: #d93829; }
+.zone-fill--z5 { background: #9b1d20; }
+
+/* Pelotões Grid (Card 2) */
+.peloton-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.peloton-pill {
+  background: #f7faf5;
+  border: 1px solid rgba(12, 24, 15, 0.07);
+  border-radius: 14px;
+  padding: 0.85rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.bento-card:hover .peloton-pill {
+  border-color: rgba(255, 85, 24, 0.18);
+  background: #ffffff;
+}
+
+.peloton-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5d6d60;
+  margin-bottom: 0.25rem;
+}
+
+.peloton-pace {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: #08110a;
+  line-height: 1;
+}
+
+.peloton-pace small {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #7b8b7e;
+}
+
+/* Luxury Perks (Card 3) */
+.luxury-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-bottom: 1.75rem;
+}
+
+.perk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.perk-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 85, 24, 0.08);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.perk-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.perk-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.perk-text strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #08110a;
+}
+
+.perk-text span {
+  font-size: 0.86rem;
+  color: #5c6c60;
+  line-height: 1.5;
+}
+
+/* Tech Ecosystem (Card 4) */
+.tech-ecosystem {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.tech-badges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.tech-badge {
+  background: #f7faf5;
+  border: 1px solid rgba(12, 24, 15, 0.07);
+  border-radius: 14px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  position: relative;
+}
+
+.tech-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-bottom: 0.2rem;
+}
+
+.tech-badge strong {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #08110a;
+}
+
+.tech-badge span {
+  font-size: 0.76rem;
+  color: #6a7a6e;
+  line-height: 1.35;
+}
+
+.tech-flow-banner {
+  background: linear-gradient(135deg, rgba(8, 17, 10, 0.04) 0%, rgba(255, 85, 24, 0.06) 100%);
+  border: 1px solid rgba(255, 85, 24, 0.15);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.flow-icon {
+  font-size: 1.25rem;
+  color: var(--accent);
+}
+
+.flow-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.flow-text strong {
+  font-size: 0.84rem;
+  color: #08110a;
+}
+
+.flow-text span {
+  font-size: 0.78rem;
+  color: #556558;
+  line-height: 1.4;
+}
+
+/* Rodapés dos Cards Bento */
+.bento-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(12, 24, 15, 0.07);
+  margin-top: auto;
+}
+
+.bento-card__metric {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #4b5b4f;
+  letter-spacing: 0.02em;
+}
+
+.bento-card__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f2f5ef;
+  border: 1px solid rgba(12, 24, 15, 0.06);
+  display: grid;
+  place-items: center;
+  color: #08110a;
+  transition: all 0.25s ease;
+}
+
+.bento-card:hover .bento-card__icon {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+/* Faixa de Autoridade, Prova Social e CTA de Alto Padrão */
+.next__authority-section {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.authority-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(12, 24, 15, 0.08);
+  border-radius: 28px;
+  padding: clamp(2rem, 3.2vw, 3rem);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.015), 0 16px 36px -4px rgba(12, 24, 15, 0.04);
+}
+
+@media (min-width: 860px) {
+  .authority-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .authority-card:not(:last-child) {
+    border-right: 1px solid rgba(12, 24, 15, 0.08);
+    padding-right: clamp(1.2rem, 2vw, 2rem);
+  }
+  .authority-card:not(:first-child) {
+    padding-left: clamp(1.2rem, 2vw, 2rem);
+  }
+}
+
+.authority-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.authority-val {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 2.7vw, 3.2rem);
+  color: var(--accent);
+  line-height: 1;
+}
+
+.authority-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #08110a;
+  line-height: 1.35;
+}
+
+.authority-sub {
+  font-size: 0.8rem;
+  color: #728275;
+  line-height: 1.4;
+}
+
+.authority-cta-bar {
+  background: #08110a;
+  color: #ffffff;
+  border-radius: 28px;
+  padding: clamp(2rem, 3.2vw, 2.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.cta-bar-text h4 {
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.cta-bar-text p {
+  font-size: 0.96rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+}
+
+.btn--cta-athletic {
+  padding: 1.15rem 2.25rem;
+  font-size: 1.02rem;
+  box-shadow: 0 10px 30px rgba(255, 85, 24, 0.45);
+}
+
+/* ==========================================================================
+   5. RESPONSIVIDADE & ADAPTAÇÃO POR BREAKPOINTS
+   ========================================================================== */
+
+/* Telas Ultra-Wide (2560px+) - Escala Monumental Preservada */
+@media (min-width: 2560px) {
+  :root {
+    --max-width: 1800px;
+  }
+  .hero__title {
+    font-size: clamp(16.5rem, 16vw, 20rem);
+  }
+  .editorial-title-slot {
+    min-height: clamp(16.5rem, 16vw, 20rem);
+  }
+}
+
+/* Tablet e Desktops Compactos (max-width: 1080px) */
+@media (max-width: 1080px) {
+  .hero__bar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile & Telas Verticais (max-width: 768px) */
+@media (max-width: 768px) {
+  .nav {
+    top: 0.75rem;
+    width: calc(100% - 1.5rem);
+    padding: 0.55rem 1rem;
+  }
+  
+  .nav__links {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: flex;
+  }
+
+  .nav__actions #nav-cta {
+    display: none;
+  }
+
+  /* Título em 2 Linhas Alinhado e Contido */
+  .hero__title {
+    flex-direction: column;
+    gap: 0;
+    font-size: clamp(3.2rem, 18vw, 6.5rem);
+    line-height: 1.05;
+    padding-top: 0.2em;
+    margin-top: -0.1em;
+  }
+
+  .editorial-title-slot {
+    min-height: clamp(6.4rem, 36vw, 13rem);
+  }
+
+  .layer--title {
+    padding-top: 0;
+  }
+
+  .layer--mid {
+    height: 52vh;
+    bottom: 2vh;
+  }
+
+  .layer--front {
+    height: 64vh;
+  }
+
+  .hero__bar {
+    padding: 0 16px 20px;
+  }
+
+  .hero__bar-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .btn--primary {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .btn--link {
+    width: 100%;
+    justify-content: center;
+    padding: 0.65rem;
+  }
+
+  .hero__content {
+    align-items: flex-start;
+  }
+
+  .hero__lead {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+}
+
+/* Preferência de Movimento Reduzido (Acessibilidade Estrita) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .layer {
+    transform: none !important;
+  }
+  .layer--mid {
+    transform: translateX(-50%) !important;
+  }
+  .layer--front {
+    transform: translateX(-50%) !important;
+  }
+}

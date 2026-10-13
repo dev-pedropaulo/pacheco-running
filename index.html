@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ritmo Run Club — Corra além do seu limite</title>
+  <meta name="description" content="Assessoria esportiva de alta performance para quem quer evoluir no próprio ritmo. Treinos em grupo, planilhas personalizadas e uma comunidade vibrante." />
+  
+  <!-- Fontes de Alta Performance: Anton (Display Monumental) & Inter (Geométrica e Precisa) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Preload prioritário da imagem de fundo 4K para LCP instantâneo -->
+  <link rel="preload" as="image" href="img/bg-road-4k.jpg" fetchpriority="high" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Lenis Smooth Scroll Global (Ultra Aveludado & Cinemático) -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <!-- Navegação Principal com Efeito Glassmorphism & Microinterações -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" id="nav-logo" aria-label="Ritmo Run Club Página Inicial">
+        <span class="logo-symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+          </svg>
+        </span>
+        <span class="logo-text">RITMO<span class="logo-dot">.</span></span>
+      </a>
+
+      <nav class="nav__links" id="nav-menu" aria-label="Navegação principal">
+        <a href="#treinos" class="nav__link" id="nav-treinos">Treinos</a>
+        <a href="#comunidade" class="nav__link" id="nav-comunidade">Comunidade</a>
+        <a href="#planos" class="nav__link" id="nav-planos">Planos</a>
+        <a href="#metodologia" class="nav__link" id="nav-metodologia">Metodologia</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a href="#planos" class="btn btn--ghost" id="nav-cta">
+          <span>Entrar no grupo</span>
+          <svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <!-- Botão Menu Mobile Acessível -->
+        <button class="nav__toggle" id="nav-toggle" aria-label="Alternar menu de navegação" aria-expanded="false" aria-controls="nav-drawer">
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Mobile Acessível -->
+    <div class="nav__drawer" id="nav-drawer" hidden>
+      <div class="nav__drawer-links">
+        <a href="#treinos" class="nav__drawer-link">Treinos &amp; Horários</a>
+        <a href="#comunidade" class="nav__drawer-link">Comunidade &amp; Eventos</a>
+        <a href="#planos" class="nav__drawer-link">Planos de Assessoria</a>
+        <a href="#metodologia" class="nav__drawer-link">Nossa Metodologia</a>
+      </div>
+      <div class="nav__drawer-footer">
+        <a href="#planos" class="btn btn--primary btn--full">Começar a treinar agora</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Camadas de Fundo Fotográfico 4K & Pelotão Intermediário (Atrás de #treinos, z-index: 1) -->
+    <div class="hero-backdrop" id="hero-backdrop" aria-hidden="true">
+      <div class="layer layer--bg" data-depth="bg">
+        <img src="img/bg-road-4k.jpg" alt="Estrada cercada por floresta densa com luz solar matinal" fetchpriority="high" />
+      </div>
+      <div class="hero__sunburst" aria-hidden="true"></div>
+      <div class="hero__fog" aria-hidden="true"></div>
+      <div class="layer layer--mid" data-depth="mid">
+        <div class="mid-wrapper">
+          <img class="mid-shadow" src="img/shadow-mid-4k.png" alt="" aria-hidden="true" />
+          <img class="mid-runners" src="img/runners-mid-4k.png" alt="Pelotão intermediário de corredores em ritmo ritmado de prova" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Hero Stage (Pelotão da Frente, Título Branco na Hero e Ações) -->
+    <section class="hero" id="hero" aria-label="Apresentação Ritmo Run Club">
+
+      <!-- Camada do Título Monumental na Hero (Versão Branca, z-index: 10, atrás dos corredores) -->
+      <div class="layer layer--title" data-depth="title" id="hero-title-layer">
+        <div class="hero__title title--white" id="title-white">
+          <span class="title-word title-word--solid">CORRA</span>
+          <span class="title-word title-word--outline">ALÉM</span>
+        </div>
+      </div>
+
+      <!-- Névoa e Haze Atmosférico Matinal na Hero (Mix-blend Screen) -->
+      <div class="hero__atmosphere" id="hero-atmosphere" aria-hidden="true"></div>
+
+      <!-- Pelotão da Frente (3 Atletas Líderes com Sombra de Contato, z-index: 20) -->
+      <div class="layer layer--front" data-depth="front" id="layer-front">
+        <div class="front-wrapper">
+          <div class="front-contact-shadow" aria-hidden="true"></div>
+          <img class="front-runners" src="img/runners-front-4k.png" alt="Três atletas em primeiro plano liderando o pelotão com alta intensidade" />
+        </div>
+      </div>
+
+      <!-- Sombra de Transição e Vinheta Aveludada Inferior -->
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <!-- Barra de Chamada e Ações (Hero Stage) -->
+      <div class="hero__bar">
+        <div class="hero__bar-inner">
+          
+          <!-- Canto Inferior Esquerdo: Bloco de Texto Limpo & Editorial -->
+          <div class="hero__content">
+            <p class="hero__lead">
+              Treinos em grupo, planilhas personalizadas e periodização científica para quem busca evolução consistente, saúde e superação no próprio ritmo.
+            </p>
+          </div>
+
+          <!-- Canto Inferior Direito: Ações Primária e Secundária -->
+          <div class="hero__actions">
+            <a href="#planos" class="btn btn--primary" id="hero-cta">
+              <span>Começar a treinar</span>
+              <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+              </svg>
+            </a>
+            <a href="#treinos" class="btn btn--link" id="hero-secondary">
+              <span>Conhecer os treinos</span>
+              <span class="link-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Cortina Branca (z-index: 40, 100% sólida, borda perfeitamente reta) -->
+    <section class="next" id="treinos">
+      <div class="next__full-blur" id="next-full-blur" aria-hidden="true"></div>
+      <div class="next__inner">
+
+        <!-- Bloco Editorial Sincronizado: Título ÚNICO com corte dinâmico de cor na linha divisória -->
+        <div class="next__editorial-header" id="editorial-header">
+          <span class="editorial-prefix" id="editorial-prefix">Treino e equipe focados para que você</span>
+          <div class="editorial-title-slot" id="editorial-title-slot">
+            <div class="hero__title-box" id="hero-title-box">
+              <!-- Camada Laranja: Visível em #treinos (z-index: 42 sobre o fundo branco) -->
+              <div class="hero__title title--orange" id="title-orange">
+                <span class="title-word title-word--solid">CORRA</span>
+                <span class="title-word title-word--outline">ALÉM</span>
+              </div>
+              <!-- Título semântico H1 para acessibilidade e SEO -->
+              <h1 class="hero__title-sr">CORRA ALÉM</h1>
+            </div>
+          </div>
+          <span class="editorial-suffix" id="editorial-suffix">e alcance seus objetivos.</span>
+        </div>
+
+        <p class="next__lead-desc" id="editorial-lead">
+          Do primeiro 5K à maratona internacional, nossa assessoria combina periodização individualizada, suporte biomecânico e a força contagiante de uma comunidade de alto rendimento.
+        </p>
+
+        <!-- Seletor Interativo de Objetivos (Tabs de Alta Performance) -->
+        <div class="next__filter-tabs" role="tablist" aria-label="Filtrar treinos por distância e objetivo">
+          <button class="filter-tab is-active" data-filter="all" type="button">Todos os Níveis</button>
+          <button class="filter-tab" data-filter="5k" type="button">5K &amp; 10K Estreia</button>
+          <button class="filter-tab" data-filter="21k" type="button">Meia Maratona 21K</button>
+          <button class="filter-tab" data-filter="42k" type="button">Maratona 42K &amp; Ultra</button>
+        </div>
+
+        <!-- Bento Grid Atlético de Luxo (On Running / Tracksmith / Nike Lab) -->
+        <div class="next__bento-grid">
+          
+          <!-- Card 1: Destaque Amplo (Span 8) - Fisiologia & Telemetria Cardíaca Z1 a Z5 -->
+          <article class="bento-card bento-card--large" data-category="all,21k,42k">
+            <div class="bento-card__header">
+              <span class="bento-card__meta-label">FISIOLOGIA DO EXERCÍCIO</span>
+              <span class="bento-card__tag">Modelo Polarizado ACWR</span>
+            </div>
+            <h3>Periodização Científica &amp; Controle de Lactato</h3>
+            <p>
+              Planilhas desenhadas com precisão matemática pelo modelo Acute:Chronic Workload Ratio (ACWR). Monitoramento contínuo de curva de lactato, periodização ondulatória e testes periódicos de VO2 Máx para evolução com risco zero de overtraining.
+            </p>
+            
+            <!-- Telemetria Esportiva Visual: Zonas Cardíacas Z1 a Z5 -->
+            <div class="telemetry-box">
+              <div class="telemetry-header">
+                <span class="telemetry-title">DISTRIBUIÇÃO DE INTENSIDADE &bull; PERIODIZAÇÃO POLARIZADA</span>
+                <span class="telemetry-badge">+22% Eficiência Biomecânica</span>
+              </div>
+              <div class="zone-bars">
+                <div class="zone-item">
+                  <div class="zone-info">
+                    <span class="zone-label"><span class="zone-color zone-z1"></span>Z1 Regenerativo (&lt; 130 bpm)</span>
+                    <span class="zone-pct">15% vol</span>
+                  </div>
+                  <div class="zone-track"><div class="zone-fill zone-fill--z1" style="width: 15%"></div></div>
+                </div>
+                <div class="zone-item">
+                  <div class="zone-info">
+                    <span class="zone-label"><span class="zone-color zone-z2"></span>Z2 Base Aeróbica Fundamental (131-152 bpm) &bull; <strong class="zone-highlight">Zona de Ouro</strong></span>
+                    <span class="zone-pct">65% vol</span>
+                  </div>
+                  <div class="zone-track"><div class="zone-fill zone-fill--z2" style="width: 65%"></div></div>
+                </div>
+                <div class="zone-item">
+                  <div class="zone-info">
+                    <span class="zone-label"><span class="zone-color zone-z3"></span>Z3 Ritmo de Maratona / Tempo Run (153-164 bpm)</span>
+                    <span class="zone-pct">10% vol</span>
+                  </div>
+                  <div class="zone-track"><div class="zone-fill zone-fill--z3" style="width: 10%"></div></div>
+                </div>
+                <div class="zone-item">
+                  <div class="zone-info">
+                    <span class="zone-label"><span class="zone-color zone-z4"></span>Z4 Limiar de Lactato (165-174 bpm)</span>
+                    <span class="zone-pct">6% vol</span>
+                  </div>
+                  <div class="zone-track"><div class="zone-fill zone-fill--z4" style="width: 6%"></div></div>
+                </div>
+                <div class="zone-item">
+                  <div class="zone-info">
+                    <span class="zone-label"><span class="zone-color zone-z5"></span>Z5 Potência Máxima &amp; VO2 Máx (175+ bpm)</span>
+                    <span class="zone-pct">4% vol</span>
+                  </div>
+                  <div class="zone-track"><div class="zone-fill zone-fill--z5" style="width: 4%"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-card__footer">
+              <span class="bento-card__metric">Feedback semanal individualizado sincronizado no TrainingPeaks</span>
+              <span class="bento-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="8" x2="13" y2="8"></line>
+                  <polyline points="9 4 13 8 9 12"></polyline>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 2: Pelotões Guiados por Ritmo (Span 4) -->
+          <article class="bento-card bento-card--medium" data-category="all,5k,21k,42k">
+            <div class="bento-card__header">
+              <span class="bento-card__meta-label">PONTUALIDADE &amp; CADÊNCIA</span>
+              <span class="bento-card__tag">Pacers Oficiais</span>
+            </div>
+            <h3>Pelotões por Ritmo de Prova</h3>
+            <p>
+              Treinos de tiro e longões aos finais de semana com pacers experientes que ditam a cadência exata para você cravar o seu PR.
+            </p>
+            
+            <div class="peloton-grid">
+              <div class="peloton-pill">
+                <div class="peloton-badge">ALPHA &bull; SUB-3H</div>
+                <div class="peloton-pace">3'55 - 4'20 <small>/km</small></div>
+              </div>
+              <div class="peloton-pill">
+                <div class="peloton-badge">BETA &bull; SUB-1H45 (21K)</div>
+                <div class="peloton-pace">4'40 - 5'05 <small>/km</small></div>
+              </div>
+              <div class="peloton-pill">
+                <div class="peloton-badge">GAMMA &bull; SUB-55M (10K)</div>
+                <div class="peloton-pace">5'20 - 5'45 <small>/km</small></div>
+              </div>
+              <div class="peloton-pill">
+                <div class="peloton-badge">DELTA &bull; EVOLUÇÃO</div>
+                <div class="peloton-pace">6'00 - 6'30 <small>/km</small></div>
+              </div>
+            </div>
+
+            <div class="bento-card__footer">
+              <span class="bento-card__metric">38 Sessões semanais em parques e pistas</span>
+              <span class="bento-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="8" x2="13" y2="8"></line>
+                  <polyline points="9 4 13 8 9 12"></polyline>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 3: Lounge VIP & Infraestrutura de Prova (Span 6) -->
+          <article class="bento-card bento-card--half-left" data-category="all,21k,42k">
+            <div class="bento-card__header">
+              <span class="bento-card__meta-label">INFRAESTRUTURA COMPLETA</span>
+              <span class="bento-card__tag">Estrutura VIP</span>
+            </div>
+            <h3>Lounge Privativo &amp; Recuperação Ativa</h3>
+            <p>
+              Da largada à linha de chegada, suporte integral para você focar exclusivamente em correr o seu melhor tempo sem qualquer preocupação logística.
+            </p>
+
+            <div class="luxury-perks">
+              <div class="perk-item">
+                <div class="perk-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="perk-text">
+                  <strong>Recuperação NormaTec &amp; Fisioterapia</strong>
+                  <span>Botas de compressão pneumática e liberação miofascial ativa no pós-treino e pós-prova.</span>
+                </div>
+              </div>
+              <div class="perk-item">
+                <div class="perk-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                </div>
+                <div class="perk-text">
+                  <strong>Tenda Exclusiva nas Maiores Maratonas</strong>
+                  <span>Guarda-volumes seguro, hidratação de precisão e lounge privativo em SP, Rio, Buenos Aires e Berlim.</span>
+                </div>
+              </div>
+              <div class="perk-item">
+                <div class="perk-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                </div>
+                <div class="perk-text">
+                  <strong>Coffee Bar &amp; Nutrição Esportiva</strong>
+                  <span>Café especial pré-treino, géis energéticos e eletrólitos calibrados para cada treino longo.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-card__footer">
+              <span class="bento-card__metric">+1.240 Atletas conectados e integrados</span>
+              <span class="bento-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="8" x2="13" y2="8"></line>
+                  <polyline points="9 4 13 8 9 12"></polyline>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 4: Integração Digital & Telemetria Strava/Garmin (Span 6) -->
+          <article class="bento-card bento-card--half-right" data-category="all,5k,21k,42k">
+            <div class="bento-card__header">
+              <span class="bento-card__meta-label">CONECTIVIDADE TOTAL</span>
+              <span class="bento-card__tag">Ecossistema Digital</span>
+            </div>
+            <h3>Sincronização Direta com seu GPS</h3>
+            <p>
+              Diga adeus a planilhas em PDF ou anotações manuais. Cada sessão prescrita é sincronizada diretamente com o seu relógio esportivo.
+            </p>
+
+            <div class="tech-ecosystem">
+              <div class="tech-badges">
+                <div class="tech-badge">
+                  <span class="tech-dot"></span>
+                  <strong>Garmin Connect</strong>
+                  <span>Passos &amp; Zonas Automáticas</span>
+                </div>
+                <div class="tech-badge">
+                  <span class="tech-dot"></span>
+                  <strong>Strava Summit</strong>
+                  <span>Segmentos &amp; Sincronia de Provas</span>
+                </div>
+                <div class="tech-badge">
+                  <span class="tech-dot"></span>
+                  <strong>Apple Watch Ultra</strong>
+                  <span>Potência &amp; Oscilação Vertical</span>
+                </div>
+                <div class="tech-badge">
+                  <span class="tech-dot"></span>
+                  <strong>TrainingPeaks</strong>
+                  <span>Curva de Carga &amp; Fitness (CTL)</span>
+                </div>
+              </div>
+              <div class="tech-flow-banner">
+                <div class="flow-icon">⚡</div>
+                <div class="flow-text">
+                  <strong>Prescrição &rarr; Relógio &rarr; Análise de Dados</strong>
+                  <span>O treino sobe no GPS, orienta os intervalos por vibração e gera telemetria completa pós-corrida.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-card__footer">
+              <span class="bento-card__metric">Zero planilhas em PDF &bull; 100% automatizado</span>
+              <span class="bento-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="8" x2="13" y2="8"></line>
+                  <polyline points="9 4 13 8 9 12"></polyline>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Faixa de Autoridade, Prova Social e CTA de Alto Impacto -->
+        <div class="next__authority-section">
+          <div class="authority-grid">
+            <div class="authority-card">
+              <span class="authority-val">1.240+</span>
+              <span class="authority-label">Atletas Ativos no Clube</span>
+              <span class="authority-sub">São Paulo &bull; Rio &bull; Curitiba &bull; Lisboa</span>
+            </div>
+            <div class="authority-card">
+              <span class="authority-val">98.4%</span>
+              <span class="authority-label">Atingiram Recorde Pessoal</span>
+              <span class="authority-sub">Em provas oficiais nos últimos 12 meses</span>
+            </div>
+            <div class="authority-card">
+              <span class="authority-val">100%</span>
+              <span class="authority-label">Treinadores Pós-graduados</span>
+              <span class="authority-sub">CREF ativo &amp; especialização em fisiologia</span>
+            </div>
+            <div class="authority-card">
+              <span class="authority-val">38</span>
+              <span class="authority-label">Treinos Presenciais / Semana</span>
+              <span class="authority-sub">Ibirapuera, USP, Aterro e Pistas Oficiais</span>
+            </div>
+          </div>
+          
+          <div class="authority-cta-bar">
+            <div class="cta-bar-text">
+              <h4>Pronto para evoluir no seu ritmo?</h4>
+              <p>Venha correr um treino com a equipe sem compromisso. Estrutura de apoio e pacer inclusos.</p>
+            </div>
+            <a href="#planos" class="btn btn--primary btn--cta-athletic">
+              <span>Agendar Treino Experimental Gratuito</span>
+              <svg class="btn__arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

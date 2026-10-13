@@ -1,0 +1,6 @@
+interface:
+  display_name: "Premium Hero"
+  short_description: "Hero premium com imagem e revisão visual"
+  default_prompt: "Use $premium-hero para criar uma hero premium com imagem de fundo para esta landing page."
+policy:
+  allow_implicit_invocation: true
