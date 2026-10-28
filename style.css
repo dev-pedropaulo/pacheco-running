@@ -3139,16 +3139,15 @@ img, picture {
     padding-top: 0;
   }
 
+  /* Os PNGs dos corredores são 16:9 e os 3 atletas ocupam ~75% da largura.
+     Dimensiona pela largura da tela (não pela altura) para que os três caibam. */
   .layer--mid {
-    height: 52vh;
-    height: 52svh;
-    bottom: 2vh;
+    height: min(62vw, 52svh);
     bottom: 2svh;
   }
 
   .layer--front {
-    height: 64vh;
-    height: 64svh;
+    height: min(75vw, 64svh);
   }
 
   .hero__bar {
