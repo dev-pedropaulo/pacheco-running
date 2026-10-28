@@ -2350,8 +2350,6 @@ img, picture {
     padding: 0.5rem 0.85rem;
   }
 }
-  }
-}
 
 /* ==========================================================================
    SEÇÃO: METODOLOGIA CIENTÍFICA, TESTE DE VO2 E ESTRUTURA
@@ -3067,6 +3065,50 @@ img, picture {
   .nav__actions #nav-cta {
     display: none;
   }
+
+  /* Drawer ocupa a largura do pill e rola em telas baixas */
+  .nav__drawer {
+    left: 0;
+    right: 0;
+    padding: 1.25rem;
+    max-height: calc(100vh - 6rem);
+    max-height: calc(100svh - 6rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Celulares pequenos (max-width: 480px) */
+@media (max-width: 480px) {
+  .nav__logo-img {
+    height: 32px;
+    max-width: 130px;
+  }
+
+  .stream-card {
+    width: 220px;
+    height: 200px;
+  }
+
+  .next__cta-box {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .next__cta-content {
+    min-width: 0;
+  }
+}
+
+/* Dispositivos touch: evita hover "grudado" após o toque */
+@media (hover: none) {
+  .pillar-card:hover {
+    transform: none;
+  }
+
+  .story-block:hover .story-block__img,
+  .stream-card:hover .stream-card__img {
+    transform: none;
+  }
 }
 
 /* Mobile & Telas Verticais (max-width: 768px) */
@@ -3091,11 +3133,14 @@ img, picture {
 
   .layer--mid {
     height: 52vh;
+    height: 52svh;
     bottom: 2vh;
+    bottom: 2svh;
   }
 
   .layer--front {
     height: 64vh;
+    height: 64svh;
   }
 
   .hero__bar {
