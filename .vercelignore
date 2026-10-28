@@ -1,0 +1,7 @@
+server.mjs
+playwright.config.js
+package.json
+node_modules
+.snapshots
+.maestri
+skills
