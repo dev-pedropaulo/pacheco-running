@@ -11,8 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   
-  <!-- Preload prioritário da imagem de fundo 4K para LCP instantâneo -->
-  <link rel="preload" as="image" href="img/bg-road-4k.jpg" fetchpriority="high" />
+  <!-- Preload prioritário da imagem de fundo responsiva para LCP instantâneo -->
+  <link rel="preload" as="image" href="img/bg-road-mobile.jpg" media="(max-width: 768px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="img/bg-road-4k.jpg" media="(min-width: 769px)" fetchpriority="high" />
   <link rel="stylesheet" href="style.css" />
   
   <!-- Lenis Smooth Scroll Global (Ultra Aveludado & Cinemático) -->
@@ -69,7 +70,10 @@
     <!-- 1. Camadas de Fundo Fotográfico 4K & Pelotão Intermediário (Atrás de #treinos, z-index: 1) -->
     <div class="hero-backdrop" id="hero-backdrop" aria-hidden="true">
       <div class="layer layer--bg" data-depth="bg">
-        <img src="img/bg-road-4k.jpg" alt="Estrada cercada por floresta densa com luz solar matinal" fetchpriority="high" />
+        <picture>
+          <source media="(max-width: 768px)" srcset="img/bg-road-mobile.jpg" />
+          <img src="img/bg-road-4k.jpg" alt="Estrada cercada por floresta densa com luz solar matinal" fetchpriority="high" />
+        </picture>
       </div>
       <div class="hero__sunburst" aria-hidden="true"></div>
       <div class="hero__fog" aria-hidden="true"></div>
