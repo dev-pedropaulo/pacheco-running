@@ -3147,12 +3147,12 @@ img, picture {
   /* Os PNGs dos corredores são 16:9 e os 3 atletas ocupam ~75% da largura.
      Dimensiona pela largura da tela e eleva o pelotão acima da barra de texto/botões. */
   .layer--mid {
-    height: min(66vw, 54svh);
+    height: min(60vw, 54svh);
     bottom: calc(var(--hero-bar-offset) + 2svh);
   }
 
   .layer--front {
-    height: min(80vw, 66svh);
+    height: min(73vw, 66svh);
     bottom: var(--hero-bar-offset);
   }
 

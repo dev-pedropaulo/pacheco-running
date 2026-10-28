@@ -70,6 +70,21 @@
     }
   };
 
+  // 2.1 Mobile: mede a barra de texto/botões para assentar os corredores logo acima dela
+  const syncHeroBarOffset = () => {
+    if (!heroBar) return;
+    const h = heroBar.offsetHeight;
+    if (h > 0) {
+      document.documentElement.style.setProperty('--hero-bar-offset', `${Math.max(h - 6, 0)}px`);
+    }
+  };
+  syncHeroBarOffset();
+  window.addEventListener('resize', syncHeroBarOffset, { passive: true });
+  window.addEventListener('load', syncHeroBarOffset);
+  if (typeof ResizeObserver !== 'undefined' && heroBar) {
+    new ResizeObserver(syncHeroBarOffset).observe(heroBar);
+  }
+
   // 3. Menu Mobile Drawer Acessível
   let closeMobileDrawer = null;
   if (navToggle && navDrawer) {
