@@ -404,15 +404,21 @@
       }
 
       // 8. Clipping Cirúrgico dos Corredores, Sombras e Névoa (Não invadem #treinos)
-      const cutBottom = Math.max(0, window.innerHeight - curtainTop);
+      // O corte só se inicia quando a cortina de #treinos realmente atinge a base de cada elemento
       if (layerFront) {
-        layerFront.style.clipPath = cutBottom > 0 ? `inset(0 0 ${cutBottom.toFixed(1)}px 0)` : 'none';
+        const frontRect = layerFront.getBoundingClientRect();
+        const cutFront = Math.max(0, frontRect.bottom - curtainTop);
+        layerFront.style.clipPath = cutFront > 0 ? `inset(0 0 ${cutFront.toFixed(1)}px 0)` : 'none';
       }
       if (layerMid) {
-        layerMid.style.clipPath = cutBottom > 0 ? `inset(0 0 ${cutBottom.toFixed(1)}px 0)` : 'none';
+        const midRect = layerMid.getBoundingClientRect();
+        const cutMid = Math.max(0, midRect.bottom - curtainTop);
+        layerMid.style.clipPath = cutMid > 0 ? `inset(0 0 ${cutMid.toFixed(1)}px 0)` : 'none';
       }
       if (heroAtmosphere) {
-        heroAtmosphere.style.clipPath = cutBottom > 0 ? `inset(0 0 ${cutBottom.toFixed(1)}px 0)` : 'none';
+        const atmoRect = heroAtmosphere.getBoundingClientRect();
+        const cutAtmo = Math.max(0, atmoRect.bottom - curtainTop);
+        heroAtmosphere.style.clipPath = cutAtmo > 0 ? `inset(0 0 ${cutAtmo.toFixed(1)}px 0)` : 'none';
       }
 
       // Fade out de segurança após estar completamente dentro de #treinos
