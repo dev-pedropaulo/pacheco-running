@@ -3121,6 +3121,11 @@ img, picture {
 
 /* Mobile & Telas Verticais (max-width: 768px) */
 @media (max-width: 768px) {
+  :root {
+    /* Altura aproximada da barra mobile (texto + 2 botões empilhados) */
+    --hero-bar-offset: 235px;
+  }
+
   /* Título em 2 Linhas Alinhado e Contido */
   .hero__title {
     flex-direction: column;
@@ -3140,14 +3145,15 @@ img, picture {
   }
 
   /* Os PNGs dos corredores são 16:9 e os 3 atletas ocupam ~75% da largura.
-     Dimensiona pela largura da tela (não pela altura) para que os três caibam. */
+     Dimensiona pela largura da tela e eleva o pelotão acima da barra de texto/botões. */
   .layer--mid {
-    height: min(62vw, 52svh);
-    bottom: 2svh;
+    height: min(66vw, 54svh);
+    bottom: calc(var(--hero-bar-offset) + 2svh);
   }
 
   .layer--front {
-    height: min(75vw, 64svh);
+    height: min(80vw, 66svh);
+    bottom: var(--hero-bar-offset);
   }
 
   .hero__bar {
