@@ -1989,12 +1989,12 @@ img, picture {
 
 /* Fileira 1: Desliza para a Esquerda */
 .track--left {
-  animation: streamScrollLeft 48s linear infinite;
+  animation: streamScrollLeft 68s linear infinite;
 }
 
 /* Fileira 2: Desliza para a Direita */
 .track--right {
-  animation: streamScrollRight 52s linear infinite;
+  animation: streamScrollRight 72s linear infinite;
 }
 
 .track--left:hover,
