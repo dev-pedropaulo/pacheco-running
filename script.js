@@ -1,19 +1,17 @@
 /**
- * Ritmo Run Club — Parallax Cinematográfico & Smooth Scroll Global
+ * Pacheco Running — Assessoria Esportiva
+ * Parallax Cinematográfico & Smooth Scroll Global
  * 
  * Orquestração Especialista:
  * 1. Scroll-Driven Blur Reveal no Texto Editorial:
- *    - O texto editorial (meta-tag, prefixo, sufixo, lead) emerge de um blur cinematográfico de 14px -> 0px
- *    - Opacidade de 0.15 -> 1.0 e translação de 20px -> 0px sincronizadas com a subida de #treinos
- * 2. Seam Lip com Frosted Glass Real sobrepondo a Hero:
- *    - .next__seam-lip com backdrop-filter: blur(24px) flutua 40px acima da linha divisória
- *    - Suaviza e desfoca a cena fotográfica e os corredores antes da transição para o branco sólido
- * 3. Transição de Cor Gradual & Docking com Respiro Total do Acento Agudo:
+ *    - O texto editorial (prefixo, sufixo, lead) emerge de um blur suave de 6px -> 0px
+ *    - Opacidade de 0.35 -> 1.0 e translação de 16px -> 0px sincronizadas com a subida de #treinos
+ * 2. Transição de Cor Milimétrica & Docking Perfeito:
  *    - Título Branco (#title-white) na Hero e Título Laranja (#title-orange) em #treinos
- *    - clip-path com margem superior negativa de -25% (inset(-25% -10% ...)) garantindo folga total para o 'É' de ALÉM
- *    - Pouso contínuo em 0, 0, 0 sem reflow, sem appendChild e sem layout shifts
- * 4. Interatividade dos Filtros de Objetivos (Tabs de Pílulas):
- *    - Alternância de categorias e destaque nos cards do Bento Grid
+ *    - clip-path calculado em pixels reais contra curtainTop no viewport
+ *    - Pouso contínuo sem reflow, sem appendChild e sem layout shifts
+ * 3. Full Blur Cobertura da Segunda Seção:
+ *    - .next__full-blur sobrepõe a segunda seção durante a rolagem e dissipa suavemente no docking
  */
 
 (() => {
@@ -36,8 +34,6 @@
   const navDrawer = document.getElementById('nav-drawer');
   const drawerLinks = document.querySelectorAll('.nav__drawer-link');
   const heroBar = hero?.querySelector('.hero__bar');
-  const filterTabs = document.querySelectorAll('.filter-tab');
-  const bentoCards = document.querySelectorAll('.bento-card');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // 1. Inicialização do Lenis Smooth Scroll Global
@@ -99,27 +95,6 @@
       if (nav && !nav.contains(e.target)) {
         toggleMenu(false);
       }
-    });
-  }
-
-  // 4. Seletor Interativo de Objetivos (Tabs de Filtro do Bento Grid)
-  if (filterTabs.length > 0) {
-    filterTabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        filterTabs.forEach((t) => t.classList.remove('is-active'));
-        tab.classList.add('is-active');
-        const filter = tab.getAttribute('data-filter') || 'all';
-
-        bentoCards.forEach((card) => {
-          const categories = card.getAttribute('data-category') || '';
-          const categoryList = categories.split(',').map((c) => c.trim());
-          if (filter === 'all' || categoryList.includes(filter)) {
-            card.classList.remove('is-dimmed');
-          } else {
-            card.classList.add('is-dimmed');
-          }
-        });
-      });
     });
   }
 
@@ -414,4 +389,338 @@
   // Inicialização no carregamento
   onScrollUpdate(window.scrollY);
   requestRender();
+})();
+
+/* ==========================================================================
+   Player de Vídeo Customizado — "Histórias que Correm"
+   ========================================================================== */
+(function initCustomVideoPlayer() {
+  const player = document.getElementById('custom-video-player');
+  const video = document.getElementById('video-elaine');
+  if (!player || !video) return;
+
+  const bigPlayBtn = document.getElementById('player-big-play');
+  const playBtn = document.getElementById('player-play-btn');
+  const iconPlay = playBtn ? playBtn.querySelector('.icon-play') : null;
+  const iconPause = playBtn ? playBtn.querySelector('.icon-pause') : null;
+
+  const progressBar = document.getElementById('player-progress-bar');
+  const progressFill = document.getElementById('player-progress-fill');
+  const progressThumb = document.getElementById('player-progress-thumb');
+  const progressBuffered = document.getElementById('player-progress-buffered');
+
+  const currentTimeEl = document.getElementById('player-current-time');
+  const totalTimeEl = document.getElementById('player-total-time');
+
+  const muteBtn = document.getElementById('player-mute-btn');
+  const iconVolHigh = muteBtn ? muteBtn.querySelector('.icon-vol-high') : null;
+  const iconVolMuted = muteBtn ? muteBtn.querySelector('.icon-vol-muted') : null;
+
+  const fsBtn = document.getElementById('player-fs-btn');
+
+  // Formata segundos em mm:ss
+  function formatTime(seconds) {
+    if (isNaN(seconds) || seconds < 0) return '00:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  }
+
+  // Atualiza botões de Play / Pause
+  function updatePlayState(isPlaying) {
+    if (isPlaying) {
+      player.classList.add('is-playing');
+      if (iconPlay) iconPlay.style.display = 'none';
+      if (iconPause) iconPause.style.display = 'block';
+      if (playBtn) playBtn.setAttribute('aria-label', 'Pausar vídeo');
+    } else {
+      player.classList.remove('is-playing');
+      if (iconPlay) iconPlay.style.display = 'block';
+      if (iconPause) iconPause.style.display = 'none';
+      if (playBtn) playBtn.setAttribute('aria-label', 'Reproduzir vídeo');
+    }
+  }
+
+  // Alterna Play / Pause
+  function togglePlay() {
+    if (video.paused || video.ended) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }
+
+  video.addEventListener('play', () => updatePlayState(true));
+  video.addEventListener('pause', () => updatePlayState(false));
+  video.addEventListener('ended', () => {
+    updatePlayState(false);
+    video.currentTime = 0;
+    if (progressFill) progressFill.style.width = '0%';
+    if (progressThumb) progressThumb.style.left = '0%';
+    if (currentTimeEl) currentTimeEl.textContent = '00:00';
+  });
+
+  // Clique no botão de Play Gigante
+  if (bigPlayBtn) {
+    bigPlayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+  }
+
+  // Clique no botão Play/Pause da barra inferior
+  if (playBtn) {
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+  }
+
+  // Clique no próprio frame de vídeo para pausar/retomar (exceto se clicar nos controles)
+  player.addEventListener('click', (e) => {
+    if (e.target.closest('#player-controls')) return;
+    togglePlay();
+  });
+
+  // Atualização contínua do progresso do vídeo
+  video.addEventListener('timeupdate', () => {
+    if (isDragging) return;
+    const duration = video.duration || 0;
+    const current = video.currentTime || 0;
+    const pct = duration > 0 ? (current / duration) * 100 : 0;
+
+    if (progressFill) progressFill.style.width = `${pct}%`;
+    if (progressThumb) progressThumb.style.left = `${pct}%`;
+    if (currentTimeEl) currentTimeEl.textContent = formatTime(current);
+    if (progressBar) progressBar.setAttribute('aria-valuenow', Math.round(pct));
+  });
+
+  // Buffer de carregamento
+  video.addEventListener('progress', () => {
+    if (video.buffered.length > 0 && video.duration > 0) {
+      const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+      const pct = (bufferedEnd / video.duration) * 100;
+      if (progressBuffered) progressBuffered.style.width = `${Math.min(pct, 100)}%`;
+    }
+  });
+
+  // Metadados carregados (duração total)
+  function onMetadataReady() {
+    if (video.duration && !isNaN(video.duration)) {
+      if (totalTimeEl) totalTimeEl.textContent = formatTime(video.duration);
+    }
+  }
+
+  if (video.readyState >= 1) {
+    onMetadataReady();
+  } else {
+    video.addEventListener('loadedmetadata', onMetadataReady);
+  }
+
+  // Scrubber / Barra de Progresso Interativa (Seek com clique e arrasto)
+  let isDragging = false;
+
+  function seekTo(clientX) {
+    if (!progressBar || !video.duration) return;
+    const rect = progressBar.getBoundingClientRect();
+    const pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    video.currentTime = pos * video.duration;
+    const pct = pos * 100;
+    if (progressFill) progressFill.style.width = `${pct}%`;
+    if (progressThumb) progressThumb.style.left = `${pct}%`;
+    if (currentTimeEl) currentTimeEl.textContent = formatTime(video.currentTime);
+  }
+
+  if (progressBar) {
+    progressBar.addEventListener('mousedown', (e) => {
+      e.stopPropagation();
+      isDragging = true;
+      progressBar.classList.add('is-dragging');
+      seekTo(e.clientX);
+
+      const onMouseMove = (ev) => {
+        if (isDragging) seekTo(ev.clientX);
+      };
+
+      const onMouseUp = () => {
+        if (isDragging) {
+          isDragging = false;
+          progressBar.classList.remove('is-dragging');
+        }
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+      };
+
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    });
+
+    // Suporte a toque no celular
+    progressBar.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+      if (!e.touches || !e.touches[0]) return;
+      isDragging = true;
+      progressBar.classList.add('is-dragging');
+      seekTo(e.touches[0].clientX);
+
+      const onTouchMove = (ev) => {
+        if (isDragging && ev.touches && ev.touches[0]) {
+          seekTo(ev.touches[0].clientX);
+        }
+      };
+
+      const onTouchEnd = () => {
+        isDragging = false;
+        progressBar.classList.remove('is-dragging');
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('touchend', onTouchEnd);
+      };
+
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+      window.addEventListener('touchend', onTouchEnd);
+    }, { passive: true });
+
+    // Acessibilidade via teclado na barra de progresso (Setas esquerda/direita)
+    progressBar.addEventListener('keydown', (e) => {
+      if (!video.duration) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        video.currentTime = Math.min(video.duration, video.currentTime + 5);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        video.currentTime = Math.max(0, video.currentTime - 5);
+      }
+    });
+  }
+
+  // Controle de Áudio (Mute / Unmute)
+  if (muteBtn) {
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      if (video.muted) {
+        if (iconVolHigh) iconVolHigh.style.display = 'none';
+        if (iconVolMuted) iconVolMuted.style.display = 'block';
+        muteBtn.setAttribute('aria-label', 'Ativar áudio');
+      } else {
+        if (iconVolHigh) iconVolHigh.style.display = 'block';
+        if (iconVolMuted) iconVolMuted.style.display = 'none';
+        muteBtn.setAttribute('aria-label', 'Silenciar áudio');
+      }
+    });
+  }
+
+  // Controle de Tela Cheia (Fullscreen)
+  if (fsBtn) {
+    fsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+      if (!isFullscreen) {
+        if (player.requestFullscreen) {
+          player.requestFullscreen().catch(() => {});
+        } else if (player.webkitRequestFullscreen) {
+          player.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    });
+  }
+
+  // Ocultação inteligente de controles ao reproduzir com reaparecimento por movimento
+  let controlsTimeout = null;
+  function showControlsTemporarily() {
+    player.classList.add('show-controls');
+    clearTimeout(controlsTimeout);
+    if (!video.paused && !video.ended) {
+      controlsTimeout = setTimeout(() => {
+        player.classList.remove('show-controls');
+      }, 2500);
+    }
+  }
+
+  player.addEventListener('mousemove', showControlsTemporarily);
+  player.addEventListener('touchstart', showControlsTemporarily, { passive: true });
+})();
+
+/* ==========================================================================
+   Esteira Interativa da Comunidade (Duas Fileiras com Formatos e Sentidos Opostos)
+   ========================================================================== */
+(function initCommunityStream() {
+  const tracks = document.querySelectorAll('.community-track');
+  if (!tracks.length) return;
+
+  tracks.forEach((track) => {
+    const cards = track.querySelectorAll('.stream-card');
+    cards.forEach((card) => {
+      card.addEventListener('focus', () => {
+        track.style.animationPlayState = 'paused';
+      });
+      card.addEventListener('blur', () => {
+        track.style.animationPlayState = 'running';
+      });
+    });
+  });
+})();
+
+/* ==========================================================================
+   Efeito Parallax da Comunidade (Palavra COMUNIDADE Passando Por Trás das Pessoas)
+   ========================================================================== */
+(function initCommunityParallax() {
+  const stage = document.getElementById('community-parallax-stage');
+  const bgLayer = document.getElementById('community-bg-layer');
+  const frontLayer = document.getElementById('community-front-layer');
+  const titleContainer = document.getElementById('community-title-container');
+
+  if (!stage || !bgLayer || !titleContainer) return;
+
+  // Respeita acessibilidade de movimento reduzido
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let ticking = false;
+
+  function updateCommunityParallax() {
+    const rect = stage.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    // Só calcula quando o banner estiver visível na janela (ou margem de 120px)
+    if (rect.bottom >= -120 && rect.top <= vh + 120) {
+      // Progresso de entrada e saída: 0 quando surge embaixo, 1 quando sai em cima
+      const progress = (vh - rect.top) / (vh + rect.height);
+      // Fator centralizado: -1 (embaixo) -> 0 (centro) -> +1 (topo)
+      const centerFactor = (progress - 0.5) * 2;
+
+      // Parallax do cenário e das pessoas: excursão vertical suave
+      const bgY = centerFactor * 50;
+
+      // Parallax da palavra COMUNIDADE que flutua por trás dos atletas
+      const titleY = centerFactor * -40;
+
+      const layerTransform = `translate3d(0, ${bgY.toFixed(2)}px, 0) scale(1.04)`;
+      bgLayer.style.transform = layerTransform;
+      if (frontLayer) {
+        frontLayer.style.transform = layerTransform;
+      }
+      titleContainer.style.transform = `translate3d(0, ${titleY.toFixed(2)}px, 0)`;
+    }
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(updateCommunityParallax);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  // Execução inicial
+  updateCommunityParallax();
 })();
