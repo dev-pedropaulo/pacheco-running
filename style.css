@@ -3139,15 +3139,53 @@ img, picture {
     padding-top: 0;
   }
 
-  /* Corredores ancorados firmemente no asfalto (sem flutuar) com escala monumental */
+  /* Corredores no Mobile: dimensionados por largura (128vw) para que os 3 atletas ocupem ~95% da tela sem cortes laterais */
   .layer--mid {
-    height: clamp(330px, 50svh, 540px);
-    bottom: 2svh;
+    width: 105vw;
+    height: auto;
+    max-width: none;
+    left: 50%;
+    transform: translate3d(calc(-50% + var(--tx, 0px)), var(--ty, 0px), 0);
+    bottom: clamp(26px, 5svh, 50px);
+  }
+
+  .mid-wrapper {
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .mid-runners {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    display: block;
   }
 
   .layer--front {
-    height: clamp(400px, 62svh, 680px);
-    bottom: 0;
+    width: 128vw;
+    height: auto;
+    max-width: none;
+    left: 50%;
+    transform: translate3d(calc(-50% + var(--tx, 0px)), var(--ty, 0px), 0);
+    bottom: clamp(14px, 3svh, 36px);
+  }
+
+  .front-wrapper {
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .front-runners {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    display: block;
+  }
+
+  .layer--bg img {
+    object-position: center 50%;
   }
 
   .hero__bar {
@@ -3155,7 +3193,7 @@ img, picture {
   }
 
   .hero__bar-blur {
-    height: clamp(240px, 38vh, 380px);
+    height: clamp(140px, 22vh, 185px);
   }
 
   .hero__bar-inner {
