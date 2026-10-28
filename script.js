@@ -71,6 +71,7 @@
   };
 
   // 3. Menu Mobile Drawer Acessível
+  let closeMobileDrawer = null;
   if (navToggle && navDrawer) {
     const toggleMenu = (open) => {
       const isExpanded = open !== undefined ? open : navToggle.getAttribute('aria-expanded') !== 'true';
@@ -81,14 +82,11 @@
         navDrawer.setAttribute('hidden', '');
       }
     };
+    closeMobileDrawer = () => toggleMenu(false);
 
     navToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleMenu();
-    });
-
-    drawerLinks.forEach((link) => {
-      link.addEventListener('click', () => toggleMenu(false));
     });
 
     document.addEventListener('click', (e) => {
@@ -97,6 +95,68 @@
       }
     });
   }
+
+  // 4. Rolagem Suave Cinemática para Botões e Links da Navbar
+  const smoothScrollToTarget = (targetSelector) => {
+    if (!targetSelector || targetSelector === '#' || targetSelector === '#topo') {
+      if (lenisInstance) {
+        lenisInstance.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    let targetElement = null;
+    try {
+      targetElement = document.querySelector(targetSelector);
+    } catch (err) {
+      targetElement = null;
+    }
+
+    if (!targetElement) return;
+
+    const navHeight = nav ? nav.offsetHeight : 76;
+    const offset = -(navHeight + 24);
+
+    if (lenisInstance) {
+      lenisInstance.scrollTo(targetElement, {
+        offset: offset,
+        duration: 1.2,
+      });
+    } else {
+      const rect = targetElement.getBoundingClientRect();
+      const targetPos = rect.top + window.scrollY + offset;
+      window.scrollTo({
+        top: Math.max(0, targetPos),
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  // Interceptar cliques em todos os links e botões da Navbar e navegação
+  const navActionLinks = document.querySelectorAll(
+    '#nav a[href^="#"], #nav-drawer a[href^="#"], .nav a[href^="#"], .nav__drawer a[href^="#"], .footer a[href^="#"], a.btn[href^="#"]'
+  );
+
+  navActionLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      e.preventDefault();
+
+      if (closeMobileDrawer) {
+        closeMobileDrawer();
+      }
+
+      smoothScrollToTarget(href);
+
+      if (href !== '#' && history.pushState) {
+        history.pushState(null, '', href);
+      }
+    });
+  });
 
   // Se o usuário prefere movimento reduzido, desativa o parallax dinâmico
   if (!hero || reduceMotion) return;
