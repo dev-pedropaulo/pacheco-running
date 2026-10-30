@@ -6,18 +6,22 @@
   <title>Pacheco Running — Assessoria Esportiva | Corra além do seu limite</title>
   <meta name="description" content="Assessoria esportiva Pacheco Running. Treinos em grupo, planilhas personalizadas, acompanhamento presencial e evolução consistente no seu próprio ritmo." />
   
-  <!-- Fontes de Alta Performance: Anton (Display Monumental) & Inter (Geométrica e Precisa) -->
+  <!-- Fontes de Alta Performance: Anton & Inter não-bloqueantes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" />
+  </noscript>
   
-  <!-- Preload prioritário da imagem de fundo responsiva para LCP instantâneo -->
-  <link rel="preload" as="image" href="img/bg-road-mobile.jpg" media="(max-width: 768px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="img/bg-road-4k.jpg" media="(min-width: 769px)" fetchpriority="high" />
-  <link rel="stylesheet" href="style.css" />
+  <!-- Preload prioritário da imagem de fundo responsiva WebP para LCP ultrarrápido -->
+  <link rel="preload" as="image" href="img/bg-road-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="img/bg-road-4k.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high" />
+  <link rel="stylesheet" href="style.min.css" />
   
-  <!-- Lenis Smooth Scroll Global (Ultra Aveludado & Cinemático) -->
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <!-- Lenis Smooth Scroll Global com carregamento deferido (não bloqueante) -->
+  <script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -25,7 +29,7 @@
   <header class="nav" id="nav">
     <div class="nav__inner">
       <a href="#" class="nav__logo" id="nav-logo" aria-label="Pacheco Running Assessoria Esportiva">
-        <img src="img/logo-pacheco-white.png" alt="Pacheco Running Assessoria Esportiva" class="nav__logo-img" />
+        <img src="img/logo-pacheco-white.webp" alt="Pacheco Running Assessoria Esportiva" class="nav__logo-img" width="160" height="42" />
       </a>
 
       <nav class="nav__links" id="nav-menu" aria-label="Navegação principal">
@@ -67,20 +71,29 @@
   </header>
 
   <main>
-    <!-- 1. Camadas de Fundo Fotográfico 4K & Pelotão Intermediário (Atrás de #treinos, z-index: 1) -->
+    <!-- 1. Camadas de Fundo Fotográfico Responsivo & Pelotão Intermediário (Atrás de #treinos, z-index: 1) -->
     <div class="hero-backdrop" id="hero-backdrop" aria-hidden="true">
       <div class="layer layer--bg" data-depth="bg">
         <picture>
-          <source media="(max-width: 768px)" srcset="img/bg-road-mobile.jpg" />
-          <img src="img/bg-road-4k.jpg" alt="Estrada cercada por floresta densa com luz solar matinal" fetchpriority="high" />
+          <source media="(max-width: 768px)" srcset="img/bg-road-mobile.webp" type="image/webp" />
+          <source media="(max-width: 768px)" srcset="img/bg-road-mobile.jpg" type="image/jpeg" />
+          <source media="(min-width: 769px)" srcset="img/bg-road-4k.webp" type="image/webp" />
+          <img src="img/bg-road-4k.jpg" alt="Estrada cercada por floresta densa com luz solar matinal" width="2560" height="1440" fetchpriority="high" />
         </picture>
       </div>
       <div class="hero__sunburst" aria-hidden="true"></div>
       <div class="hero__fog" aria-hidden="true"></div>
       <div class="layer layer--mid" data-depth="mid">
         <div class="mid-wrapper">
-          <img class="mid-shadow" src="img/shadow-mid-4k.png" alt="" aria-hidden="true" />
-          <img class="mid-runners" src="img/runners-mid-4k.png" alt="Pelotão intermediário de corredores em ritmo ritmado de prova" />
+          <picture>
+            <source srcset="img/shadow-mid.webp" type="image/webp" />
+            <img class="mid-shadow" src="img/shadow-mid-4k.png" alt="" aria-hidden="true" width="1920" height="1080" />
+          </picture>
+          <picture>
+            <source media="(max-width: 768px)" srcset="img/runners-mid-mobile.webp" type="image/webp" />
+            <source media="(min-width: 769px)" srcset="img/runners-mid.webp" type="image/webp" />
+            <img class="mid-runners" src="img/runners-mid.webp" alt="Pelotão intermediário de corredores em ritmo ritmado de prova" width="1920" height="1080" />
+          </picture>
         </div>
       </div>
     </div>
@@ -103,7 +116,11 @@
       <div class="layer layer--front" data-depth="front" id="layer-front">
         <div class="front-wrapper">
           <div class="front-contact-shadow" aria-hidden="true"></div>
-          <img class="front-runners" src="img/runners-front-4k.png" alt="Três atletas em primeiro plano liderando o pelotão com alta intensidade" />
+          <picture>
+            <source media="(max-width: 768px)" srcset="img/runners-front-mobile.webp" type="image/webp" />
+            <source media="(min-width: 769px)" srcset="img/runners-front.webp" type="image/webp" />
+            <img class="front-runners" src="img/runners-front.webp" alt="Três atletas em primeiro plano liderando o pelotão com alta intensidade" width="1920" height="1080" fetchpriority="high" />
+          </picture>
         </div>
       </div>
 
@@ -180,7 +197,10 @@
           <!-- BLOCO 1: PRIMEIRO 5KM (IMAGEM À ESQUERDA | TEXTO À DIREITA) -->
           <article class="story-block" id="objetivo-primeiro-5k">
             <div class="story-block__media">
-              <img src="img/goal-primeiro-5k.jpg" alt="Aluna da Pacheco Running correndo com camiseta oficial e acompanhamento de apoio técnico" class="story-block__img" loading="lazy" />
+              <picture>
+                <source srcset="img/goal-primeiro-5k.webp" type="image/webp" />
+                <img src="img/goal-primeiro-5k.jpg" alt="Aluna da Pacheco Running correndo com camiseta oficial e acompanhamento de apoio técnico" class="story-block__img" width="1200" height="825" loading="lazy" decoding="async" />
+              </picture>
             </div>
             <div class="story-block__content">
               <h3 class="story-block__title">Para quem nunca correu e quer começar do absoluto zero</h3>
@@ -219,7 +239,10 @@
           <!-- BLOCO 2: MEIA & MARATONA (TEXTO À ESQUERDA | IMAGEM À DIREITA) -->
           <article class="story-block story-block--reverse" id="objetivo-maratona">
             <div class="story-block__media">
-              <img src="img/goal-maratona.jpg" alt="Atleta da Pacheco Running cruzando a fita de chegada com raça e regata oficial da equipe" class="story-block__img" loading="lazy" />
+              <picture>
+                <source srcset="img/goal-maratona.webp" type="image/webp" />
+                <img src="img/goal-maratona.jpg" alt="Atleta da Pacheco Running cruzando a fita de chegada com raça e regata oficial da equipe" class="story-block__img" width="1200" height="825" loading="lazy" decoding="async" />
+              </picture>
             </div>
             <div class="story-block__content">
               <h3 class="story-block__title">A superação dos 21km e 42km</h3>
@@ -251,7 +274,10 @@
           <!-- BLOCO 3: QUALIDADE DE VIDA (IMAGEM À ESQUERDA | TEXTO À DIREITA) -->
           <article class="story-block" id="objetivo-qualidade-de-vida">
             <div class="story-block__media">
-              <img src="img/goal-qualidade-de-vida.jpg" alt="Alunos da Pacheco Running treinando juntos sob a luz da manhã com uniforme oficial" class="story-block__img" loading="lazy" />
+              <picture>
+                <source srcset="img/goal-qualidade-de-vida.webp" type="image/webp" />
+                <img src="img/goal-qualidade-de-vida.jpg" alt="Alunos da Pacheco Running treinando juntos sob a luz da manhã com uniforme oficial" class="story-block__img" width="1200" height="825" loading="lazy" decoding="async" />
+              </picture>
             </div>
             <div class="story-block__content">
               <h3 class="story-block__title">A energia de acordar às 5h e começar o dia com o sol</h3>
@@ -290,7 +316,10 @@
           <!-- BLOCO 4: MARATONAS INTERNACIONAIS (TEXTO À ESQUERDA | IMAGEM À DIREITA) -->
           <article class="story-block story-block--reverse" id="objetivo-internacional">
             <div class="story-block__media">
-              <img src="img/goal-internacional.jpg" alt="Atleta da Pacheco Running correndo prova em grande metrópole com regata oficial e número de peito" class="story-block__img" loading="lazy" />
+              <picture>
+                <source srcset="img/goal-internacional.webp" type="image/webp" />
+                <img src="img/goal-internacional.jpg" alt="Atleta da Pacheco Running correndo prova em grande metrópole com regata oficial e número de peito" class="story-block__img" width="1200" height="825" loading="lazy" decoding="async" />
+              </picture>
             </div>
             <div class="story-block__content">
               <h3 class="story-block__title">A emoção inesquecível de cruzar a linha fora do país</h3>
@@ -322,7 +351,10 @@
           <!-- BLOCO 5: SAÚDE SUSTENTÁVEL & EMAGRECIMENTO (IMAGEM À ESQUERDA | TEXTO À DIREITA) -->
           <article class="story-block" id="objetivo-emagrecimento">
             <div class="story-block__media">
-              <img src="img/goal-emagrecimento.jpg" alt="Corredor da Pacheco Running em plena forma física cruzando a linha com os braços abertos e regata oficial" class="story-block__img" loading="lazy" />
+              <picture>
+                <source srcset="img/goal-emagrecimento.webp" type="image/webp" />
+                <img src="img/goal-emagrecimento.jpg" alt="Corredor da Pacheco Running em plena forma física cruzando a linha com os braços abertos e regata oficial" class="story-block__img" width="1200" height="825" loading="lazy" decoding="async" />
+              </picture>
             </div>
             <div class="story-block__content">
               <h3 class="story-block__title">Emagrecer e ganhar saúde como consequência natural dos treinos</h3>
@@ -525,13 +557,19 @@
           <div class="community-parallax-stage" id="community-parallax-stage">
             <!-- 1. Imagem de Fundo (Camada Traseira) -->
             <div class="community-parallax-layer community-parallax-layer--bg" id="community-bg-layer">
-              <img 
-                src="img/community-main.jpg" 
-                alt="Comunidade oficial de atletas da Pacheco Running reunida" 
-                class="community-parallax-img" 
-                id="community-parallax-img"
-                loading="lazy" 
-              />
+              <picture>
+                <source srcset="img/community-main.webp" type="image/webp" />
+                <img 
+                  src="img/community-main.jpg" 
+                  alt="Comunidade oficial de atletas da Pacheco Running reunida" 
+                  class="community-parallax-img" 
+                  id="community-parallax-img"
+                  width="1400"
+                  height="787"
+                  loading="lazy" 
+                  decoding="async"
+                />
+              </picture>
             </div>
 
             <!-- 2. Palavra COMUNIDADE (Camada Intermediária - Passa POR TRÁS das pessoas!) -->
@@ -543,13 +581,19 @@
 
             <!-- 3. Camada Frontal dos Atletas (Recorte com Fundo Transparente sobreposto ao título) -->
             <div class="community-parallax-layer community-parallax-layer--front" id="community-front-layer" aria-hidden="true">
-              <img 
-                src="img/community-people.png" 
-                alt="" 
-                class="community-people-img" 
-                id="community-people-img"
-                loading="lazy" 
-              />
+              <picture>
+                <source srcset="img/community-people.webp" type="image/webp" />
+                <img 
+                  src="img/community-people.png" 
+                  alt="" 
+                  class="community-people-img" 
+                  id="community-people-img"
+                  width="1400"
+                  height="787"
+                  loading="lazy" 
+                  decoding="async"
+                />
+              </picture>
             </div>
 
             <!-- 4. Vinheta e Sombra Suave de Integração -->
@@ -609,76 +653,76 @@
               <!-- ================= FILEIRA 1: DESLIZA PARA A ESQUERDA ================= -->
               <div class="community-track-wrapper track-wrapper--left">
                 <div class="community-track track--left" id="community-track-1">
-                  <div class="stream-card"><img src="img/community/foto-01.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-02.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-03.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-04.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-05.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-06.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-07.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-08.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-09.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-10.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-11.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-12.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-13.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-14.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-15.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
+                  <div class="stream-card"><img src="img/community/foto-01.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-02.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-03.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-04.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-05.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-06.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-07.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-08.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-09.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-10.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-11.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-12.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-13.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-14.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-15.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
 
                   <!-- Clones Fileira 1 (Loop Infinito) -->
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-01.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-02.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-03.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-04.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-05.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-06.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-07.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-08.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-09.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-10.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-11.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-12.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-13.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-14.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-15.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-01.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-02.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-03.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-04.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-05.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-06.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-07.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-08.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-09.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-10.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-11.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-12.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-13.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-14.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-15.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
                 </div>
               </div>
 
               <!-- ================= FILEIRA 2: DESLIZA PARA A DIREITA ================= -->
               <div class="community-track-wrapper track-wrapper--right">
                 <div class="community-track track--right" id="community-track-2">
-                  <div class="stream-card"><img src="img/community/foto-15.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-14.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-13.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-12.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-11.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-10.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-09.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-08.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-07.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-06.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-05.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-04.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-03.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-02.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card"><img src="img/community/foto-01.jpg" alt="Atleta Pacheco Running" class="stream-card__img" loading="lazy" /></div>
+                  <div class="stream-card"><img src="img/community/foto-15.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-14.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-13.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-12.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-11.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-10.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-09.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-08.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-07.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-06.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-05.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-04.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-03.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-02.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card"><img src="img/community/foto-01.webp" alt="Atleta Pacheco Running" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
 
                   <!-- Clones Fileira 2 (Loop Infinito) -->
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-15.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-14.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-13.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-12.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-11.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-10.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-09.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-08.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-07.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-06.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-05.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-04.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-03.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-02.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
-                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-01.jpg" alt="" class="stream-card__img" loading="lazy" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-15.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-14.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-13.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-12.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-11.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-10.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-09.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-08.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-07.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-06.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-05.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-04.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-03.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-02.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
+                  <div class="stream-card" aria-hidden="true"><img src="img/community/foto-01.webp" alt="" class="stream-card__img" width="480" height="600" loading="lazy" decoding="async" /></div>
                 </div>
               </div>
 
@@ -697,7 +741,7 @@
             <div class="coach-visual">
               <div class="coach-photo-main-frame">
                 <img 
-                  src="img/rafael/rafael-pacheco-01.jpg" 
+                  src="img/rafael/rafael-pacheco-01.webp" width="800" height="1000" decoding="async" 
                   alt="Rafael Pacheco, treinador e fundador da Pacheco Running Assessoria Esportiva" 
                   class="coach-photo-main" 
                   loading="lazy" 
@@ -707,7 +751,7 @@
               <!-- Foto Secundária: Em Ação nos Treinos -->
               <div class="coach-photo-sub-frame" aria-hidden="true">
                 <img 
-                  src="img/rafael/rafael-pacheco-02.jpg" 
+                  src="img/rafael/rafael-pacheco-02.webp" width="720" height="960" decoding="async" 
                   alt="Rafael Pacheco em treino de corrida" 
                   class="coach-photo-sub" 
                   loading="lazy" 
@@ -951,7 +995,7 @@
         <!-- Coluna 1: Marca, Missão e Avaliação Google -->
         <div class="footer__col footer__col--brand">
           <a href="#hero" class="footer__logo" aria-label="Voltar ao início">
-            <img src="img/logo-pacheco-white.png" alt="Pacheco Running Assessoria Esportiva" class="footer__logo-img" />
+            <img src="img/logo-pacheco-white.webp" alt="Pacheco Running Assessoria Esportiva" class="footer__logo-img" width="160" height="42" loading="lazy" decoding="async" />
           </a>
           <p class="footer__brand-desc">
             Assessoria esportiva pioneira em Ubá e região. Treinamento individualizado com base científica e acompanhamento de ponta a ponta — presencial e 100% on-line.
@@ -1054,6 +1098,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script defer src="script.min.js"></script>
 </body>
 </html>
