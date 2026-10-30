@@ -35,10 +35,11 @@
   const drawerLinks = document.querySelectorAll('.nav__drawer-link');
   const heroBar = hero?.querySelector('.hero__bar');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window);
 
-  // 1. Inicialização do Lenis Smooth Scroll Global
+  // 1. Inicialização do Lenis Smooth Scroll Global (Apenas em Desktop não-touch)
   let lenisInstance = null;
-  if (typeof window.Lenis !== 'undefined' && !reduceMotion) {
+  if (typeof window.Lenis !== 'undefined' && !reduceMotion && !isTouchDevice) {
     lenisInstance = new window.Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -182,8 +183,6 @@
   const currentMouse = { x: 0, y: 0 };
   let currentScrollY = window.scrollY;
   let isRunning = false;
-
-  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
   // Geometria dinâmica e contínua para ancoragem sem salto / sem reflow
   function computeDockGeometry() {
